@@ -36,7 +36,7 @@ const Products = () => {
       if (filters.sort) params.append('sort', filters.sort);
 
       const { data } = await axios.get(`/products?${params.toString()}`);
-      setProducts(data);
+      setProducts(Array.isArray(data) ? data : []);
     } catch (error) {
       toast.error('Failed to load products');
     } finally {

@@ -29,7 +29,7 @@ const AdminProducts = () => {
   const fetchProducts = async () => {
     try {
       const { data } = await axios.get('/products');
-      setProducts(data);
+      setProducts(Array.isArray(data) ? data : []);
     } catch (error) {
       toast.error('Failed to load products');
     } finally {

@@ -27,7 +27,7 @@ const Dashboard = () => {
         ]);
 
         const orders = ordersRes.data.orders;
-        const products = productsRes.data;
+        const products = Array.isArray(productsRes.data) ? productsRes.data : [];
 
         setStats({
           totalOrders: orders.length,

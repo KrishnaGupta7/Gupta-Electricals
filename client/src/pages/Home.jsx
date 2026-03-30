@@ -13,7 +13,7 @@ const Home = () => {
     const fetchFeatured = async () => {
       try {
         const { data } = await axios.get('/products/featured');
-        setFeaturedProducts(data);
+        setFeaturedProducts(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error('Failed to fetch featured products');
       } finally {

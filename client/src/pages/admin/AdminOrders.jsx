@@ -26,7 +26,7 @@ const AdminOrders = () => {
   const fetchOrders = async () => {
     try {
       const { data } = await axios.get('/orders');
-      setOrders(data.orders);
+      setOrders(Array.isArray(data.orders) ? data.orders : []);
     } catch (error) {
       toast.error('Failed to load orders');
     } finally {
