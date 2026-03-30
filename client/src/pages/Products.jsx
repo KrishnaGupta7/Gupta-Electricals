@@ -22,7 +22,13 @@ const Products = () => {
     sort: ''
   });
 
-  const categories = ['Mobile', 'Laptop', 'TV', 'Audio', 'Camera', 'Accessories'];
+  const categories = [
+    'Programmable IC', 'Driver Control Card', 'Mosfet Transistor', 'Integrated Circuits',
+    'Thyristor Module', 'Capacitors', 'Leone Relays', 'Electronic Transistors', 'Fuse Holder',
+    'Single Phase Transformer', 'Power Capacitor', 'IGBT Module', 'Electrical Relays', 'Spare Parts',
+    'Colling Fan', 'Voltage Stabilizer', 'Microtek Inverter', 'Panel Accessories', 'Power Mosfet',
+    'Power Transistor', 'General Purpose Relays', 'Ups Battery'
+  ];
 
   const fetchProducts = async () => {
     setLoading(true);

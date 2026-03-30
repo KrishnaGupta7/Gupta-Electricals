@@ -24,12 +24,28 @@ const Home = () => {
   }, []);
 
   const categories = [
-    { name: 'Mobile', emoji: '📱', color: 'bg-blue-100 text-blue-700' },
-    { name: 'Laptop', emoji: '💻', color: 'bg-purple-100 text-purple-700' },
-    { name: 'TV', emoji: '📺', color: 'bg-green-100 text-green-700' },
-    { name: 'Audio', emoji: '🎧', color: 'bg-yellow-100 text-yellow-700' },
-    { name: 'Camera', emoji: '📷', color: 'bg-red-100 text-red-700' },
-    { name: 'Accessories', emoji: '⌨️', color: 'bg-gray-100 text-gray-700' },
+    { name: 'Programmable IC', emoji: '🔬', color: 'bg-blue-100 text-blue-700' },
+    { name: 'Driver Control Card', emoji: '🎛️', color: 'bg-purple-100 text-purple-700' },
+    { name: 'Mosfet Transistor', emoji: '⚡', color: 'bg-yellow-100 text-yellow-700' },
+    { name: 'Integrated Circuits', emoji: '🔲', color: 'bg-green-100 text-green-700' },
+    { name: 'Thyristor Module', emoji: '🔌', color: 'bg-red-100 text-red-700' },
+    { name: 'Capacitors', emoji: '🔋', color: 'bg-orange-100 text-orange-700' },
+    { name: 'Leone Relays', emoji: '🔀', color: 'bg-teal-100 text-teal-700' },
+    { name: 'Electronic Transistors', emoji: '📡', color: 'bg-indigo-100 text-indigo-700' },
+    { name: 'Fuse Holder', emoji: '🛡️', color: 'bg-pink-100 text-pink-700' },
+    { name: 'Single Phase Transformer', emoji: '🔄', color: 'bg-cyan-100 text-cyan-700' },
+    { name: 'Power Capacitor', emoji: '⚙️', color: 'bg-lime-100 text-lime-700' },
+    { name: 'IGBT Module', emoji: '🔧', color: 'bg-amber-100 text-amber-700' },
+    { name: 'Electrical Relays', emoji: '💡', color: 'bg-violet-100 text-violet-700' },
+    { name: 'Spare Parts', emoji: '🔩', color: 'bg-gray-100 text-gray-700' },
+    { name: 'Colling Fan', emoji: '🌀', color: 'bg-sky-100 text-sky-700' },
+    { name: 'Voltage Stabilizer', emoji: '📊', color: 'bg-emerald-100 text-emerald-700' },
+    { name: 'Microtek Inverter', emoji: '🔆', color: 'bg-rose-100 text-rose-700' },
+    { name: 'Panel Accessories', emoji: '🗂️', color: 'bg-fuchsia-100 text-fuchsia-700' },
+    { name: 'Power Mosfet', emoji: '⚡', color: 'bg-blue-100 text-blue-800' },
+    { name: 'Power Transistor', emoji: '🔌', color: 'bg-purple-100 text-purple-800' },
+    { name: 'General Purpose Relays', emoji: '🔀', color: 'bg-green-100 text-green-800' },
+    { name: 'Ups Battery', emoji: '🔋', color: 'bg-yellow-100 text-yellow-800' },
   ];
 
   const features = [
