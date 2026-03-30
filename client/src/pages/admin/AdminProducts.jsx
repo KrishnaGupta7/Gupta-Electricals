@@ -71,15 +71,43 @@ const AdminProducts = () => {
     setForm({ ...form, [name]: type === 'checkbox' ? checked : value });
   };
 
-  const handleImageChange = (index, value) => {
-    const updated = [...form.images];
-    updated[index].url = value;
-    setForm({ ...form, images: updated });
+  const [uploadingImage, setUploadingImage] = useState(false);
+
+  const handleImageUpload = async (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length === 0) return;
+
+    setUploadingImage(true);
+    try {
+      const formData = new FormData();
+      files.forEach(file => formData.append('images', file));
+
+      const { data } = await axios.post('/upload/multiple', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+
+      const newImages = data.map(img => ({ url: img.url, public_id: img.public_id }));
+      setForm(prev => ({
+        ...prev,
+        images: [...prev.images.filter(img => img.url), ...newImages]
+      }));
+      toast.success(`${files.length} image(s) uploaded!`);
+    } catch (error) {
+      toast.error('Image upload failed');
+    } finally {
+      setUploadingImage(false);
+    }
   };
 
-  const addImage = () => {
-    setForm({ ...form, images: [...form.images, { url: '' }] });
-  };
+  // const handleImageChange = (index, value) => {
+  //   const updated = [...form.images];
+  //   updated[index].url = value;
+  //   setForm({ ...form, images: updated });
+  // };
+
+  // const addImage = () => {
+  //   setForm({ ...form, images: [...form.images, { url: '' }] });
+  // };
 
   const removeImage = (index) => {
     const updated = form.images.filter((_, i) => i !== index);
@@ -348,32 +376,54 @@ const AdminProducts = () => {
               {/* Images */}
               <div>
                 <label className="text-sm font-medium text-gray-700 mb-2 block">
-                  Product Images (URLs)
+                  Product Images
                 </label>
-                <div className="space-y-2">
-                  {form.images.map((img, i) => (
-                    <div key={i} className="flex gap-2">
-                      <input
-                        type="text" value={img.url}
-                        onChange={(e) => handleImageChange(i, e.target.value)}
-                        placeholder="https://example.com/image.jpg"
-                        className="flex-1 border border-gray-300 rounded-lg px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-yellow-400"
-                      />
-                      <button
-                        type="button" onClick={() => removeImage(i)}
-                        className="p-2 text-red-400 hover:bg-red-50 rounded-lg"
-                      >
-                        <X size={18} />
-                      </button>
-                    </div>
-                  ))}
-                  <button
-                    type="button" onClick={addImage}
-                    className="text-sm text-yellow-600 font-medium hover:underline"
-                  >
-                    + Add another image
-                  </button>
+
+                {/* Upload Button */}
+                <div className="mb-3">
+                  <label className="flex items-center justify-center gap-2 border-2 border-dashed border-yellow-400 rounded-xl p-4 cursor-pointer hover:bg-yellow-50 transition">
+                    <input
+                      type="file"
+                      multiple
+                      accept="image/*"
+                      className="hidden"
+                      onChange={handleImageUpload}
+                      disabled={uploadingImage}
+                    />
+                    {uploadingImage ? (
+                      <span className="text-sm text-gray-500">Uploading...</span>
+                    ) : (
+                      <>
+                        <span className="text-2xl">📸</span>
+                        <span className="text-sm font-medium text-yellow-600">
+                          Click to upload images (max 5)
+                        </span>
+                      </>
+                    )}
+                  </label>
                 </div>
+
+                {/* Image Previews */}
+                {form.images.filter(img => img.url).length > 0 && (
+                  <div className="flex gap-3 flex-wrap">
+                    {form.images.filter(img => img.url).map((img, i) => (
+                      <div key={i} className="relative">
+                        <img
+                          src={img.url}
+                          alt=""
+                          className="w-20 h-20 object-cover rounded-xl border border-gray-200"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => removeImage(i)}
+                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Specs */}
